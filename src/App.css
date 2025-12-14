@@ -28,7 +28,7 @@
   background: #111827;    /* gray-900 */
   border-top: 1px solid #1f2937; /* gray-800 */
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   align-items: stretch;
 }
 
@@ -38,9 +38,10 @@
   border: 0;
   background: transparent;
   color: #9ca3af; /* gray-400 */
-  padding: 12px 8px;
-  font-size: 14px;
+  padding: 16px 10px; /* slightly higher */
+  font-size: 16px;    /* bigger text */
   cursor: pointer;
+  white-space: nowrap; /* keep labels on one line */
 }
 
 .tab:hover {
@@ -56,6 +57,7 @@
 /* For small screens: make it touch-friendly */
 @media (hover: none) {
   .tab {
-    padding: 16px 8px;
+    padding: 20px 12px; /* extra touch target on mobile */
+    font-size: 17px;
   }
 }

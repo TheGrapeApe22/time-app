@@ -1,0 +1,66 @@
+/* Minimal, clean styles for the Todo UI */
+.todo-page {
+	max-width: 520px;
+	margin: 24px auto;
+	padding: 16px;
+    background-color: transparent;
+}
+
+.todo-add button {
+	padding: 8px 12px;
+}
+
+.todo-list {
+	display: flex;
+	flex-direction: column;
+	border: none;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.todo-item {
+	display: flex;
+	align-items: center;
+	gap: 0;
+	padding: 0;
+	position: relative;
+	margin: 0;
+}
+
+.todo-item input {
+	flex: 1;
+	width: 100%;
+	display: block;
+	padding: 12px 36px 12px 12px; /* extra right padding for delete button */
+	border: 0;
+    color: white;
+    background-color: transparent;
+}
+.todo-item input:focus {
+    outline: none;
+}
+
+/* Thin separators between items inside the container */
+.todo-item + .todo-item {
+	border-top: 1px solid #eee;
+}
+
+.add-button, .x-button {
+	border: none;
+	background: none;
+	width: 24px;
+	height: 24px;
+	border-radius: 6px;
+	cursor: pointer;
+	text-align: center;
+	font-size: 12px;
+	position: absolute;
+	right: 8px;
+	top: 50%;
+	transform: translateY(-50%);
+    color: white;
+}
+
+.add-button:hover, .x-button:hover {
+	background: rgba(255, 255, 255, 0.1);
+}

@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
 import Clock from './components/Clock';
 import './App.css';
+import TodoPage from './components/TodoPage';
 
-type TabKey = 'home' | 'tasks' | 'settings';
+type TabKey = 'todo' | 'cluster' | 'amaj7' | 'planb';
 
 function App() {
-  const [activeTab, setActiveTab] = useState<TabKey>('home');
+  const [activeTab, setActiveTab] = useState<TabKey>('todo');
 
   const renderPage = () => {
     switch (activeTab) {
-      case 'home':
+      case 'todo':
+        return <div className="page">
+          <TodoPage />
+        </div>;
+      case 'cluster':
         return <div className="page">
           <Clock />
         </div>;
-      case 'tasks':
-        return <div className="page">Your Tasks</div>;
-      case 'settings':
-        return <div className="page">Settings</div>;
+      case 'amaj7':
+        return <div className="page">Amaj7 Clock</div>;
+      case 'planb':
+        return <div className="page">Plan B Clock</div>;
       default:
         return null;
     }
@@ -24,28 +29,33 @@ function App() {
 
   return (
     <div className="App app-shell">
-      <main className="content" role="main">
+      <main className="content">
         {renderPage()}
       </main>
-
-      <nav className="tabbar" role="tablist" aria-label="Bottom navigation">
+      <nav className="tabbar">
         <button
-          className={`tab ${activeTab === 'home' ? 'active' : ''}`}
-          onClick={() => setActiveTab('home')}
+          className={`tab ${activeTab === 'todo' ? 'active' : ''}`}
+          onClick={() => setActiveTab('todo')}
         >
-          Home
+          Todo
         </button>
         <button
-          className={`tab ${activeTab === 'tasks' ? 'active' : ''}`}
-          onClick={() => setActiveTab('tasks')}
+          className={`tab ${activeTab === 'cluster' ? 'active' : ''}`}
+          onClick={() => setActiveTab('cluster')}
         >
-          Tasks
+          Cluster Clock
         </button>
         <button
-          className={`tab ${activeTab === 'settings' ? 'active' : ''}`}
-          onClick={() => setActiveTab('settings')}
+          className={`tab ${activeTab === 'amaj7' ? 'active' : ''}`}
+          onClick={() => setActiveTab('amaj7')}
         >
-          Settings
+          Amaj7 Clock
+        </button>
+        <button
+          className={`tab ${activeTab === 'planb' ? 'active' : ''}`}
+          onClick={() => setActiveTab('planb')}
+        >
+          Plan B Clock
         </button>
       </nav>
     </div>
