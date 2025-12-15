@@ -41,25 +41,25 @@ function App() {
           className={`tab ${activeTab === 'todo' ? 'active' : ''}`}
           onClick={() => setActiveTab('todo')}
         >
-          <img src={TabIcon1} alt="tab icon" className="tab-icon" />
+          <img src={TabIcon1} alt="todo tab icon" className="tab-icon" />
         </button>
         <button
           className={`tab ${activeTab === 'cluster' ? 'active' : ''}`}
           onClick={() => setActiveTab('cluster')}
         >
-          <img src={TabIcon2} alt="tab icon" className="tab-icon" />
+          <img src={TabIcon2} alt="cluster tab icon" className="tab-icon" />
         </button>
         <button
           className={`tab ${activeTab === 'amaj7' ? 'active' : ''}`}
           onClick={() => setActiveTab('amaj7')}
         >
-          <img src={TabIcon3} alt="tab icon" className="tab-icon" />
+          <img src={TabIcon3} alt="amaj7 tab icon" className="tab-icon" />
         </button>
         <button
           className={`tab ${activeTab === 'planb' ? 'active' : ''}`}
           onClick={() => setActiveTab('planb')}
         >
-          <img src={TabIcon4} alt="tab icon" className="tab-icon" />
+          <img src={TabIcon4} alt="planb tab icon" className="tab-icon" />
         </button>
       </nav>
     </div>

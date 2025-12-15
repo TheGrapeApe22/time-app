@@ -32,8 +32,8 @@
 	width: 100%;
 	display: block;
 	padding: 12px 36px 12px 12px; /* extra right padding for delete button */
-	border: 0;
-    color: white;
+	border: none;
+    color: var(--text-color);
     background-color: transparent;
 }
 .todo-item input:focus {
@@ -42,7 +42,7 @@
 
 /* Thin separators between items inside the container */
 .todo-item + .todo-item {
-	border-top: 1px solid #eee;
+	border-top: 1px solid var(--text-color);
 }
 
 .add-button, .x-button {
@@ -58,9 +58,9 @@
 	right: 8px;
 	top: 50%;
 	transform: translateY(-50%);
-    color: white;
+    color: var(--text-color);
 }
 
 .add-button:hover, .x-button:hover {
-	background: rgba(255, 255, 255, 0.1);
+	background: rgba(121, 121, 121, 0.1);
 }

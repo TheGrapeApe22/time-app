@@ -1,3 +1,17 @@
+:root {
+  --text-color: #000000;
+}
+
+body {
+  --background-color: #ffffff;
+  --tab-fill-color: #ffffff;
+  --tab-hover-color: #cbcbcb;
+  --tab-outline-color: #000000ad;
+  --tab-active-outline-color: var(--tab-outline-color);
+  --tab-active-color: #fffd83;
+  --tabbar-thickness: 5px;
+}
+
 .App {
   text-align: center;
 }
@@ -6,8 +20,8 @@
   min-height: 100vh;
   display: grid;
   grid-template-rows: 1fr auto; /* content + bottom tabbar */
-  background: #0f172a; /* slate-900-ish */
-  color: #e5e7eb;      /* gray-200-ish */
+  background: var(--background-color); /* slate-900-ish */
+  color: var(--background-color);      /* gray-200-ish */
 }
 
 /* Content area */
@@ -25,8 +39,7 @@
 .tabbar {
   position: sticky;       /* stays at bottom even with content scroll */
   bottom: 0;
-  background: #111827;    /* gray-900 */
-  border-top: 1px solid #1f2937; /* gray-800 */
+  background: var(--tab-fill-color);    /* gray-900 */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   align-items: stretch;
@@ -35,23 +48,25 @@
 /* Tab buttons */
 .tab {
   appearance: none;
-  border: 0;
+  border: none;
   background: transparent;
-  color: #9ca3af; /* gray-400 */
+  color: var(--text-color); /* gray-400 */
   padding: 16px 10px; /* slightly higher */
   font-size: 16px;    /* bigger text */
   cursor: pointer;
   white-space: nowrap; /* keep labels on one line */
+  box-shadow: inset 0 var(--tabbar-thickness) 0 var(--tab-outline-color);
 }
 
 .tab:hover {
-  color: #e5e7eb; /* gray-200 */
+  background: var(--tab-hover-color); /* gray-200 */
 }
 
 .tab.active {
-  color: #ffffff;
+  background: var(--tab-active-color);
+  color: var(--text-color);
   font-weight: 600;
-  box-shadow: inset 0 -2px 0 #60a5fa; /* blue-400 underline */
+  box-shadow: inset 0 var(--tabbar-thickness) 0 var(--tab-active-outline-color);
 }
 
 /* For small screens: make it touch-friendly */
