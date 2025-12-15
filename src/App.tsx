@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import Clock from './components/Clock';
 import './App.css';
 import TodoPage from './components/TodoPage';
+import TabIcon1 from './assets/todo-icon.jpg';
+import TabIcon2 from './assets/cluster-icon.png';
+import TabIcon3 from './assets/amaj7-icon.png';
+import TabIcon4 from './assets/plan-b-icon.png';
 
 type TabKey = 'todo' | 'cluster' | 'amaj7' | 'planb';
 
@@ -37,25 +41,25 @@ function App() {
           className={`tab ${activeTab === 'todo' ? 'active' : ''}`}
           onClick={() => setActiveTab('todo')}
         >
-          Todo
+          <img src={TabIcon1} alt="tab icon" className="tab-icon" />
         </button>
         <button
           className={`tab ${activeTab === 'cluster' ? 'active' : ''}`}
           onClick={() => setActiveTab('cluster')}
         >
-          Cluster Clock
+          <img src={TabIcon2} alt="tab icon" className="tab-icon" />
         </button>
         <button
           className={`tab ${activeTab === 'amaj7' ? 'active' : ''}`}
           onClick={() => setActiveTab('amaj7')}
         >
-          Amaj7 Clock
+          <img src={TabIcon3} alt="tab icon" className="tab-icon" />
         </button>
         <button
           className={`tab ${activeTab === 'planb' ? 'active' : ''}`}
           onClick={() => setActiveTab('planb')}
         >
-          Plan B Clock
+          <img src={TabIcon4} alt="tab icon" className="tab-icon" />
         </button>
       </nav>
     </div>
