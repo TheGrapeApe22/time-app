@@ -12,53 +12,33 @@ type TabKey = 'todo' | 'cluster' | 'amaj7' | 'planb';
 function App() {
   const [activeTab, setActiveTab] = useState<TabKey>('todo');
 
-  const renderPage = () => {
-    switch (activeTab) {
-      case 'todo':
-        return <div className="page">
-          <TodoPage />
-        </div>;
-      case 'cluster':
-        return <div className="page">
-          <Clock />
-        </div>;
-      case 'amaj7':
-        return <div className="page">Amaj7 Clock</div>;
-      case 'planb':
-        return <div className="page">Plan B Clock</div>;
-      default:
-        return null;
-    }
-  };
-
   return (
     <div className="App app-shell">
       <main className="content">
-        {renderPage()}
+        <div className={`page ${activeTab === 'todo' ? 'visible' : 'hidden'}`} aria-hidden={activeTab !== 'todo'}>
+          <TodoPage />
+        </div>
+        <div className={`page ${activeTab === 'cluster' ? 'visible' : 'hidden'}`} aria-hidden={activeTab !== 'cluster'}>
+          <Clock />
+        </div>
+        <div className={`page ${activeTab === 'amaj7' ? 'visible' : 'hidden'}`} aria-hidden={activeTab !== 'amaj7'}>
+          Amaj7 Clock
+        </div>
+        <div className={`page ${activeTab === 'planb' ? 'visible' : 'hidden'}`} aria-hidden={activeTab !== 'planb'}>
+          Plan B Clock
+        </div>
       </main>
       <nav className="tabbar">
-        <button
-          className={`tab ${activeTab === 'todo' ? 'active' : ''}`}
-          onClick={() => setActiveTab('todo')}
-        >
+        <button className={`tab ${activeTab === 'todo' ? 'active' : ''}`} onClick={() => setActiveTab('todo')}>
           <img src={TabIcon1} alt="todo tab icon" className="tab-icon" />
         </button>
-        <button
-          className={`tab ${activeTab === 'cluster' ? 'active' : ''}`}
-          onClick={() => setActiveTab('cluster')}
-        >
+        <button className={`tab ${activeTab === 'cluster' ? 'active' : ''}`} onClick={() => setActiveTab('cluster')}>
           <img src={TabIcon2} alt="cluster tab icon" className="tab-icon" />
         </button>
-        <button
-          className={`tab ${activeTab === 'amaj7' ? 'active' : ''}`}
-          onClick={() => setActiveTab('amaj7')}
-        >
+        <button className={`tab ${activeTab === 'amaj7' ? 'active' : ''}`} onClick={() => setActiveTab('amaj7')}>
           <img src={TabIcon3} alt="amaj7 tab icon" className="tab-icon" />
         </button>
-        <button
-          className={`tab ${activeTab === 'planb' ? 'active' : ''}`}
-          onClick={() => setActiveTab('planb')}
-        >
+        <button className={`tab ${activeTab === 'planb' ? 'active' : ''}`} onClick={() => setActiveTab('planb')}>
           <img src={TabIcon4} alt="planb tab icon" className="tab-icon" />
         </button>
       </nav>

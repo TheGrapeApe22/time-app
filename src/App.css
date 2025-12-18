@@ -15,7 +15,7 @@ body {
 .App {
   text-align: center;
 }
-/* App shell */
+
 .app-shell {
   min-height: 100vh;
   display: grid;
@@ -34,6 +34,9 @@ body {
   max-width: 800px;
   margin: 0 auto;
 }
+
+.page.hidden { display: none; }
+.page.visible { display: block; }
 
 /* Bottom tab bar */
 .tabbar {
