@@ -2,6 +2,10 @@ import { useRef, useState } from "react";
 import TodoItem, { Todo } from "./TodoItem";
 import "./todo.css";
 import PlusIcon from "../assets/plus-icon.png";
+import { ThemeProvider } from "@mui/material/styles";
+import { appTheme } from "./theme";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 export default function TodoPage() {
     const [todos, setTodos] = useState<Todo[]>([
@@ -27,19 +31,23 @@ export default function TodoPage() {
     };
 
     return (
-        <div className="todo-page">
-            <div className="title">Todo</div>
-            <div className="todo-list">
-                {todos.map((t) => (
-                    <TodoItem key={t.id} todo={t} onChange={handleChange} onDelete={handleDelete} onToggleStar={handleToggleStar} />
-                ))}
+        <ThemeProvider theme={appTheme}>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <div className="todo-page">
+                    <div className="title">Todo</div>
+                    <div className="todo-list">
+                        {todos.map((t) => (
+                            <TodoItem key={t.id} todo={t} onChange={handleChange} onDelete={handleDelete} onToggleStar={handleToggleStar} />
+                        ))}
 
-                <div className="todo-item">
-                    <button onClick={addTodo} className="icon-button">
-                        <img src={PlusIcon} alt="+" width="60px" />
-                    </button>
+                        <div className="todo-item">
+                            <button onClick={addTodo} className="icon-button">
+                                <img src={PlusIcon} alt="+" width="60px" />
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </LocalizationProvider>
+        </ThemeProvider>
     );
 }
