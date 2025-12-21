@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/time-app/static/css/main.41c16705.css",
+    "main.css": "/time-app/static/css/main.89c943ee.css",
     "main.js": "/time-app/static/js/main.e9a4e2ca.js",
     "static/media/x-icon.png": "/time-app/static/media/x-icon.f07651c9113858f305ad.png",
     "static/media/star-empty.png": "/time-app/static/media/star-empty.4d8d37f3f66f019a19c2.png",
@@ -9,11 +9,11 @@
     "static/media/plan-b-icon.png": "/time-app/static/media/plan-b-icon.fb4b64261f328dcf6769.png",
     "static/media/amaj7-icon.png": "/time-app/static/media/amaj7-icon.6bcd956125dd3b7b4c32.png",
     "index.html": "/time-app/index.html",
-    "main.41c16705.css.map": "/time-app/static/css/main.41c16705.css.map",
+    "main.89c943ee.css.map": "/time-app/static/css/main.89c943ee.css.map",
     "main.e9a4e2ca.js.map": "/time-app/static/js/main.e9a4e2ca.js.map"
   },
   "entrypoints": [
-    "static/css/main.41c16705.css",
+    "static/css/main.89c943ee.css",
     "static/js/main.e9a4e2ca.js"
   ]
 }
