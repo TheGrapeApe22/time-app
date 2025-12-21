@@ -1,6 +1,6 @@
+import "./todo.css";
 import { useRef, useState } from "react";
 import TodoItem, { Todo } from "./TodoItem";
-import "./todo.css";
 import PlusIcon from "../assets/plus-icon.png";
 import { ThemeProvider } from "@mui/material/styles";
 import { appTheme } from "./theme";
@@ -32,22 +32,21 @@ export default function TodoPage() {
 
     return (
         <ThemeProvider theme={appTheme}>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <div className="todo-page">
-                    <div className="title">Todo</div>
-                    <div className="todo-list">
-                        {todos.map((t) => (
-                            <TodoItem key={t.id} todo={t} onChange={handleChange} onDelete={handleDelete} onToggleStar={handleToggleStar} />
-                        ))}
-
-                        <div className="todo-item">
-                            <button onClick={addTodo} className="icon-button">
-                                <img src={PlusIcon} alt="+" width="60px" />
-                            </button>
-                        </div>
-                    </div>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <div className="todo-page">
+            <div className="title">Todo</div>
+            <div className="todo-list">
+                {todos.map((t) => (
+                    <TodoItem key={t.id} todo={t} onChange={handleChange} onDelete={handleDelete} onToggleStar={handleToggleStar} />
+                ))}
+                <div className="todo-item">
+                    <button onClick={addTodo} className="icon-button">
+                        <img src={PlusIcon} alt="+" width="60px" />
+                    </button>
                 </div>
-            </LocalizationProvider>
+            </div>
+        </div>
+        </LocalizationProvider>
         </ThemeProvider>
     );
 }

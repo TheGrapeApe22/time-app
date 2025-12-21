@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import StarFilled from "../assets/star-filled.png";
 import StarEmpty from "../assets/star-empty.png";
 import XIcon from "../assets/x-icon.png";
