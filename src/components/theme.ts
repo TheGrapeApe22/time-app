@@ -5,6 +5,9 @@ export const appTheme = createTheme({
   palette: {
     mode: "dark",
   },
+  typography: {
+    fontFamily: 'monospace',
+  },
   components: {
     MuiTimeField: {
       defaultProps: {
@@ -14,7 +17,9 @@ export const appTheme = createTheme({
             variant: "outlined",
             sx: {
               width: "8ch",
-              '& .MuiInputBase-input': { padding: '0px 0px' },
+              '& .MuiInputBase-input': {
+                padding: '0px 0px',
+              },
             },
           },
         },
