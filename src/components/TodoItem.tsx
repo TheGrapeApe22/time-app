@@ -11,9 +11,8 @@ export type Todo = {
 
 type TodoItemProps = {
 	todo: Todo;
-	onChange: (id: number, newText: string) => void;
+	onChange: (next: Todo) => void;
 	onDelete: (id: number) => void;
-	onToggleStar: (id: number) => void;
 };
 
 function textAreaAdjust(element : HTMLTextAreaElement) {
@@ -21,18 +20,18 @@ function textAreaAdjust(element : HTMLTextAreaElement) {
 	element.style.height = (element.scrollHeight)+"px";
 }
 
-export default function TodoItem({ todo, onChange, onDelete, onToggleStar }: TodoItemProps) {
+export default function TodoItem({ todo, onChange, onDelete }: TodoItemProps) {
 	return (
 		<div className="todo-item">
 			<button
 				className="icon-button"
-				onClick={() => onToggleStar(todo.id)}
+				onClick={() => onChange({ ...todo, starred: !todo.starred })}
 			>
 				<img src={todo.starred ? StarFilled : StarEmpty} alt={todo.starred ? "★" : "☆"} width="36px"/>
 			</button>
 			<textarea className="todo-input"
 				value={todo.text}
-				onChange={(e) => {onChange(todo.id, e.target.value); textAreaAdjust(e.currentTarget);}}
+				onChange={(e) => {onChange({ ...todo, text: e.target.value }); textAreaAdjust(e.currentTarget);}}
 			/>
 			<TimeField label="Start" />
 			<TimeField label="End" />

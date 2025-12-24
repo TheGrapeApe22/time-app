@@ -8,20 +8,19 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 type TodoPageProps = {
     todos: Todo[];
-    onChange: (id: number, newText: string) => void;
+    onChange: (next: Todo) => void;
     onDelete: (id: number) => void;
-    onToggleStar: (id: number) => void;
     onAdd: () => void;
 };
 
-export default function TodoPage({ todos, onChange, onDelete, onToggleStar, onAdd }: TodoPageProps) {
+export default function TodoPage({ todos, onChange, onDelete, onAdd }: TodoPageProps) {
     return (
         <ThemeProvider theme={appTheme}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
         <div className="todo-page">
             <div className="todo-list">
                 {todos.map((t) => (
-                    <TodoItem key={t.id} todo={t} onChange={onChange} onDelete={onDelete} onToggleStar={onToggleStar} />
+                    <TodoItem key={t.id} todo={t} onChange={onChange} onDelete={onDelete} />
                 ))}
                 <div className="todo-item">
                     <button onClick={onAdd} className="icon-button">

@@ -31,14 +31,14 @@ function App() {
     });
   };
 
-  const changeTodo = (id: number, newText: string) => {
+  const updateTodo = (next: Todo) => {
     setListsData((prev) => {
       const bucket = prev[selectedList] ?? { todos: [], nextId: 1 };
       return {
         ...prev,
         [selectedList]: {
           ...bucket,
-          todos: bucket.todos.map((t) => (t.id === id ? { ...t, text: newText } : t)),
+          todos: bucket.todos.map((t) => (t.id === next.id ? next : t)),
         },
       };
     });
@@ -57,18 +57,6 @@ function App() {
     });
   };
 
-  const toggleStar = (id: number) => {
-    setListsData((prev) => {
-      const bucket = prev[selectedList] ?? { todos: [], nextId: 1 };
-      return {
-        ...prev,
-        [selectedList]: {
-          ...bucket,
-          todos: bucket.todos.map((t) => (t.id === id ? { ...t, starred: !t.starred } : t)),
-        },
-      };
-    });
-  };
 
   // Persist to localStorage whenever core state changes
   useEffect(() => {
@@ -95,9 +83,8 @@ function App() {
           <TodoPage
             todos={(listsData[selectedList] ?? { todos: [], nextId: 1 }).todos}
             onAdd={addTodo}
-            onChange={changeTodo}
+            onChange={updateTodo}
             onDelete={deleteTodo}
-            onToggleStar={toggleStar}
           />
         </div>
         <div className={`page ${activeTab === 'cluster' ? 'visible' : 'hidden'}`} >
