@@ -9,7 +9,7 @@ import TabIcon4 from './assets/plan-b-icon.png';
 import Lists from './components/Lists';
 import type { Todo } from './components/TodoItem';
 import { getDefaultTodoLists, loadTodoLists, saveTodoLists, TODO_STORAGE_VERSION } from './storage/todoStorage';
-import defaultTodoList from './constants/defaultTodoList';
+import defaultTodoList from './utils/defaultTodoList';
 
 type TabKey = 'todo' | 'cluster' | 'amaj7' | 'planb';
 
@@ -90,32 +90,35 @@ function App() {
         </div>
         <div className={`page ${activeTab === 'cluster' ? 'visible' : 'hidden'}`} >
           <div className="title">Cluster Clock</div>
-          <Clock />
+          <Clock todos={(listsData['Cluster']).todos} />
           <TodoPage
-            todos={(listsData['Cluster'] ?? defaultTodoList).todos}
+            todos={(listsData['Cluster']).todos}
             onAdd={() => addTodoTo('Cluster')}
             onChange={(next) => updateTodoIn('Cluster', next)}
             onDelete={(id) => deleteTodoFrom('Cluster', id)}
+            showTimes={true}
           />
         </div>
         <div className={`page ${activeTab === 'amaj7' ? 'visible' : 'hidden'}`} >
           <div className="title">Amaj7 Clock</div>
-          <Clock />
+          <Clock todos={(listsData['Plan Amaj7']).todos} />
           <TodoPage
-            todos={(listsData['Plan Amaj7'] ?? defaultTodoList).todos}
+            todos={(listsData['Plan Amaj7']).todos}
             onAdd={() => addTodoTo('Plan Amaj7')}
             onChange={(next) => updateTodoIn('Plan Amaj7', next)}
             onDelete={(id) => deleteTodoFrom('Plan Amaj7', id)}
+            showTimes={true}
           />
         </div>
         <div className={`page ${activeTab === 'planb' ? 'visible' : 'hidden'}`} >
           <div className="title">Plan B Clock</div>
-          <Clock />
+          <Clock todos={(listsData['Plan B']).todos} />
           <TodoPage
-            todos={(listsData['Plan B'] ?? defaultTodoList).todos}
+            todos={(listsData['Plan B']).todos}
             onAdd={() => addTodoTo('Plan B')}
             onChange={(next) => updateTodoIn('Plan B', next)}
             onDelete={(id) => deleteTodoFrom('Plan B', id)}
+            showTimes={true}
           />
         </div>
       </main>

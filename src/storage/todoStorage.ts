@@ -1,5 +1,5 @@
 import type { Todo } from "../components/TodoItem";
-import defaultTodoList from "../constants/defaultTodoList";
+import defaultTodoList from "../utils/defaultTodoList";
 
 // Storage key used in localStorage for all todo lists.
 export const TODO_STORAGE_KEY = "time-app.todoLists" as const;

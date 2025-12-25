@@ -1,4 +1,6 @@
+import { timeStringToDate } from '../utils/dates';
 import './clock.css';
+import { Todo } from './TodoItem';
 
 type Shading = {
     start: number;
@@ -6,10 +8,10 @@ type Shading = {
 }
 
 type ClockProps = {
-    shadings?: Shading[];
+    todos: Todo[];
 }
 
-export default function Clock({ shadings: shadingsProp }: ClockProps) {
+export default function Clock({ todos }: ClockProps) {
     // times
     const now = new Date();
     const hour = now.getHours() % 12;
@@ -32,10 +34,19 @@ export default function Clock({ shadings: shadingsProp }: ClockProps) {
     const hx = cx + hourLen * Math.sin(hourAngle);
     const hy = cy - hourLen * Math.cos(hourAngle);
 
-    const shadings : Shading[] = shadingsProp ?? [{start: 0, end: Math.PI}, {start: 6, end: 4}];
+    function getShadings(todo: Todo): Shading {
+        const startDate = timeStringToDate(todo.startTime);
+        const endDate = timeStringToDate(todo.endTime);
+        if (!startDate || !endDate)
+            return { start: 0, end: 0 };
+        return {
+            start: startDate.getHours() % 12 * (Math.PI / 6) + (Math.PI / 360) * startDate.getMinutes(),
+            end: endDate.getHours() % 12 * (Math.PI / 6) + (Math.PI / 360) * endDate.getMinutes()
+        };
+    }
 
     // Build an arc path for a pie slice between angles (radians), 0 at 12 o'clock, clockwise
-    const arcPath = (a1: number, a2: number, r: number) => {
+    const arcPath = ({start: a1, end: a2} : Shading, r: number) => {
         const TAU = Math.PI * 2;
         function normalize(angle: number) { return ((angle % TAU) + TAU) % TAU; }
         const start = normalize(a1);
@@ -61,9 +72,10 @@ export default function Clock({ shadings: shadingsProp }: ClockProps) {
                 viewBox={`0 0 ${size} ${size}`}
             >
                 <circle className="clock-face" cx={cx} cy={cy} r={radius} />
-                {shadings.map((s, idx) => (
-                    <path key={idx} className="clock-shade" d={arcPath(s.start, s.end, radius)} />
-                ))}
+                {todos.map((todo, idx) => {
+                    const s = getShadings(todo);
+                    return <path key={idx} className="clock-shade" d={arcPath(s, radius)} />
+                })}
                 <circle className="clock-center" cx={cx} cy={cy} r={3} />
                 <line className="hand hour-hand" x1={cx} y1={cy} x2={hx} y2={hy} />
                 <line className="hand minute-hand" x1={cx} y1={cy} x2={mx} y2={my} />
