@@ -2,8 +2,10 @@ import StarFilled from "../assets/star-filled.png";
 import StarEmpty from "../assets/star-empty.png";
 import XIcon from "../assets/x-icon.png";
 import { TimeField } from "@mui/x-date-pickers";
-import colors from "../utils/colors";
+import { colors } from "../utils/colors";
 import { dateToTimeString, timeStringToDate } from "../utils/dates";
+import { useState } from "react";
+import ColorPicker from "./ColorPicker";
 
 export type Todo = {
 	id: number;
@@ -18,7 +20,7 @@ type TodoItemProps = {
 	todo: Todo;
 	onChange: (next: Todo) => void;
 	onDelete: (id: number) => void;
-	showTimes?: boolean;
+	minimize?: boolean;
 };
 
 function textAreaAdjust(element : HTMLTextAreaElement) {
@@ -26,7 +28,9 @@ function textAreaAdjust(element : HTMLTextAreaElement) {
 	element.style.height = (element.scrollHeight)+"px";
 }
 
-export default function TodoItem({ todo, onChange, onDelete, showTimes }: TodoItemProps) {
+export default function TodoItem({ todo, onChange, onDelete, minimize }: TodoItemProps) {
+	const [colorAnchor, setColorAnchor] = useState<HTMLElement | null>(null);
+	const colorOpen = Boolean(colorAnchor);
 	return (
 		<div className="todo-item">
 			<button
@@ -36,15 +40,30 @@ export default function TodoItem({ todo, onChange, onDelete, showTimes }: TodoIt
 				<img
 					src={todo.starred ? StarFilled : StarEmpty}
 					alt={todo.starred ? "★" : "☆"}
-					style={{ filter: colors[4]}}
 					width="36px"
 					/>
 			</button>
+			
+			{!minimize && <>
+				<button
+					className="color-button"
+					style={{ backgroundColor: colors[todo.colorIndex] }}
+					onClick={(e) => setColorAnchor(e.currentTarget)}
+				/>
+				<ColorPicker
+					anchorEl={colorAnchor}
+					open={colorOpen}
+					onClose={() => setColorAnchor(null)}
+					value={todo.colorIndex}
+					onChange={(idx) => onChange({ ...todo, colorIndex: idx })}
+				/>
+			</>}
+			
 			<textarea className="todo-input"
 				value={todo.text}
 				onChange={(e) => {onChange({ ...todo, text: e.target.value }); textAreaAdjust(e.currentTarget);}}
 			/>
-			{showTimes && (<>
+			{!minimize && (<>
 				<TimeField
 					label="Start"
 					ampm={false}

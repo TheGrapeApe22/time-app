@@ -11,17 +11,17 @@ type TodoPageProps = {
     onChange: (next: Todo) => void;
     onDelete: (id: number) => void;
     onAdd: () => void;
-    showTimes?: boolean;
+    minimize?: boolean;
 };
 
-export default function TodoPage({ todos, onChange, onDelete, onAdd, showTimes }: TodoPageProps) {
+export default function TodoPage({ todos, onChange, onDelete, onAdd, minimize }: TodoPageProps) {
     return (
         <ThemeProvider theme={appTheme}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
         <div className="todo-page">
             <div className="todo-list">
                 {todos.map((t) => (
-                    <TodoItem key={t.id} todo={t} onChange={onChange} onDelete={onDelete} showTimes={showTimes} />
+                    <TodoItem key={t.id} todo={t} onChange={onChange} onDelete={onDelete} minimize={minimize} />
                 ))}
                 <div className="todo-item">
                     <button onClick={onAdd} className="icon-button">

@@ -1,6 +1,7 @@
 import { timeStringToDate } from '../utils/dates';
 import './clock.css';
 import { Todo } from './TodoItem';
+import { colors, getTranslucent } from '../utils/colors';
 
 type Shading = {
     start: number;
@@ -43,11 +44,11 @@ export default function Clock({ todos, outlineColor, shadeColor, fillColor }: Cl
     const hx = cx + hourLen * Math.sin(hourAngle);
     const hy = cy - hourLen * Math.cos(hourAngle);
 
-    function getShadings(todo: Todo): Shading {
+    function getShadings(todo: Todo): Shading | null {
         const startDate = timeStringToDate(todo.startTime);
         const endDate = timeStringToDate(todo.endTime);
         if (!startDate || !endDate)
-            return { start: 0, end: 0 };
+            return null;
         return {
             start: startDate.getHours() % 12 * (Math.PI / 6) + (Math.PI / 360) * startDate.getMinutes(),
             end: endDate.getHours() % 12 * (Math.PI / 6) + (Math.PI / 360) * endDate.getMinutes()
@@ -111,12 +112,10 @@ export default function Clock({ todos, outlineColor, shadeColor, fillColor }: Cl
                 <circle cx={cx} cy={cy} r={radius} fill={fillColor} />
                 {todos.map((todo, idx) => {
                     const s = getShadings(todo);
-                    return (
-                        <g key={idx}>
-                            <path d={arcPath(s)} fill={shadeColor} stroke="none" />
-                            {arcLabel(s, todo.text)}
-                        </g>
-                    );
+                    return s && (<g key={idx}>
+                        <path d={arcPath(s)} fill={getTranslucent(colors[todo.colorIndex])} stroke="none" />
+                        {arcLabel(s, todo.text)}
+                    </g>);
                 })}
                 <line x1={cx} y1={cy} x2={hx} y2={hy} stroke={outlineColor} strokeWidth={4} strokeLinecap='round'/>
                 <line x1={cx} y1={cy} x2={mx} y2={my} stroke={outlineColor} strokeWidth={3} strokeLinecap='round' />

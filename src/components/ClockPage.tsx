@@ -36,7 +36,7 @@ export default function ClockPage({title, listKey, colors, listsData, addTodoTo,
 				onAdd={() => addTodoTo(listKey)}
 				onChange={(next) => updateTodoIn(listKey, next)}
 				onDelete={(id) => deleteTodoFrom(listKey, id)}
-				showTimes={true}
+				minimize={false}
 			/>
 		</>
 	);

@@ -62,3 +62,35 @@
 .icon-button:hover {
 	background: rgba(121, 121, 121, 0.1);
 }
+
+.color-button {
+	width: 16px;
+	height: 16px;
+	border: 1px solid var(--text-color);
+	border-radius: 4px;
+	background: transparent;
+	margin-left: 8px;
+	padding: 0;
+	cursor: default;
+}
+
+/* Color picker popover grid */
+.color-picker-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 24px);
+	gap: 8px;
+	padding: 12px;
+}
+
+.color-swatch {
+	width: 24px;
+	height: 24px;
+	border-radius: 6px;
+	border: 1px solid var(--text-color);
+	padding: 0;
+	cursor: pointer;
+}
+
+.color-swatch.selected {
+	outline: 2px solid var(--text-color);
+}
