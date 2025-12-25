@@ -1,20 +1,19 @@
 import './clock.css';
 
-type ClockProps = {
-    hour?: number;
-    minute?: number;
-};
 type Shading = {
     start: number;
     end: number;
 }
 
-export default function Clock({hour, minute}: ClockProps) {
+type ClockProps = {
+    shadings?: Shading[];
+}
+
+export default function Clock({ shadings: shadingsProp }: ClockProps) {
     // times
     const now = new Date();
-    const h = (hour ?? now.getHours()) % 12;
-    const m = minute ?? now.getMinutes();
-
+    const hour = now.getHours() % 12;
+    const minute = now.getMinutes();
     // sizes
     const size = 400;
     const radius = size * 0.45;
@@ -24,8 +23,8 @@ export default function Clock({hour, minute}: ClockProps) {
     const hourLen = radius * 0.6;
 
     // Angles in radians: 0 at 12 o'clock, clockwise
-    const minuteAngle = (Math.PI / 30) * m; // 360/60
-    const hourAngle = (Math.PI / 6) * h + (Math.PI / 360) * m; // 360/12 plus minute contribution
+    const minuteAngle = (Math.PI / 30) * minute; // 360/60
+    const hourAngle = (Math.PI / 6) * hour + (Math.PI / 360) * minute; // 360/12 plus minute contribution
 
     // Convert polar to cartesian end points
     const mx = cx + minuteLen * Math.sin(minuteAngle);
@@ -33,7 +32,7 @@ export default function Clock({hour, minute}: ClockProps) {
     const hx = cx + hourLen * Math.sin(hourAngle);
     const hy = cy - hourLen * Math.cos(hourAngle);
 
-    const shadings : Shading[] = [{start: 0, end: Math.PI}, {start: 6, end: 4}]
+    const shadings : Shading[] = shadingsProp ?? [{start: 0, end: Math.PI}, {start: 6, end: 4}];
 
     // Build an arc path for a pie slice between angles (radians), 0 at 12 o'clock, clockwise
     const arcPath = (a1: number, a2: number, r: number) => {

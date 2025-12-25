@@ -21,23 +21,24 @@ function App() {
 
   const listNames = useMemo(() => Object.keys(listsData), [listsData]);
 
-  const addTodo = () => {
+  // Generic helpers to mutate a specific list by name
+  const addTodoTo = (listName: string) => {
     setListsData((prev) => {
-      const bucket = prev[selectedList] ?? { todos: [], nextId: 1 };
+      const bucket = prev[listName] ?? defaultTodoList;
       const newTodo: Todo = { id: bucket.nextId, text: '', starred: false, startTime: null, endTime: null, colorIndex: 0 };
       return {
         ...prev,
-        [selectedList]: { todos: [...bucket.todos, newTodo], nextId: bucket.nextId + 1 },
+        [listName]: { todos: [...bucket.todos, newTodo], nextId: bucket.nextId + 1 },
       };
     });
   };
 
-  const updateTodo = (next: Todo) => {
+  const updateTodoIn = (listName: string, next: Todo) => {
     setListsData((prev) => {
-      const bucket = prev[selectedList] ?? { todos: [], nextId: 1 };
+      const bucket = prev[listName] ?? defaultTodoList;
       return {
         ...prev,
-        [selectedList]: {
+        [listName]: {
           ...bucket,
           todos: bucket.todos.map((t) => (t.id === next.id ? next : t)),
         },
@@ -45,19 +46,18 @@ function App() {
     });
   };
 
-  const deleteTodo = (id: number) => {
+  const deleteTodoFrom = (listName: string, id: number) => {
     setListsData((prev) => {
-      const bucket = prev[selectedList] ?? { todos: [], nextId: 1 };
+      const bucket = prev[listName] ?? defaultTodoList;
       return {
         ...prev,
-        [selectedList]: {
+        [listName]: {
           ...bucket,
           todos: bucket.todos.filter((t) => t.id !== id),
         },
       };
     });
   };
-
 
   // Persist to localStorage whenever core state changes
   useEffect(() => {
@@ -83,19 +83,40 @@ function App() {
           />
           <TodoPage
             todos={(listsData[selectedList] ?? defaultTodoList).todos}
-            onAdd={addTodo}
-            onChange={updateTodo}
-            onDelete={deleteTodo}
+            onAdd={() => addTodoTo(selectedList)}
+            onChange={(next) => updateTodoIn(selectedList, next)}
+            onDelete={(id) => deleteTodoFrom(selectedList, id)}
           />
         </div>
         <div className={`page ${activeTab === 'cluster' ? 'visible' : 'hidden'}`} >
+          <div className="title">Cluster Clock</div>
           <Clock />
+          <TodoPage
+            todos={(listsData['Cluster'] ?? defaultTodoList).todos}
+            onAdd={() => addTodoTo('Cluster')}
+            onChange={(next) => updateTodoIn('Cluster', next)}
+            onDelete={(id) => deleteTodoFrom('Cluster', id)}
+          />
         </div>
         <div className={`page ${activeTab === 'amaj7' ? 'visible' : 'hidden'}`} >
-          Amaj7 Clock
+          <div className="title">Amaj7 Clock</div>
+          <Clock />
+          <TodoPage
+            todos={(listsData['Plan Amaj7'] ?? defaultTodoList).todos}
+            onAdd={() => addTodoTo('Plan Amaj7')}
+            onChange={(next) => updateTodoIn('Plan Amaj7', next)}
+            onDelete={(id) => deleteTodoFrom('Plan Amaj7', id)}
+          />
         </div>
         <div className={`page ${activeTab === 'planb' ? 'visible' : 'hidden'}`} >
-          Plan B Clock
+          <div className="title">Plan B Clock</div>
+          <Clock />
+          <TodoPage
+            todos={(listsData['Plan B'] ?? defaultTodoList).todos}
+            onAdd={() => addTodoTo('Plan B')}
+            onChange={(next) => updateTodoIn('Plan B', next)}
+            onDelete={(id) => deleteTodoFrom('Plan B', id)}
+          />
         </div>
       </main>
       <nav className="tabbar">
