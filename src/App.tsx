@@ -59,6 +59,18 @@ function App() {
     });
   };
 
+  // Import todos from one list into another (replace target contents)
+  const importTodosFrom = (sourceName: string, targetName: string) => {
+    setListsData((prev) => {
+      const source = prev[sourceName] ?? defaultTodoList;
+      const copiedTodos = source.todos.map((t) => ({ ...t }));
+      return {
+        ...prev,
+        [targetName]: { todos: copiedTodos, nextId: source.nextId },
+      };
+    });
+  };
+
   // Persist to localStorage whenever core state changes
   useEffect(() => {
     saveTodoLists({
@@ -98,6 +110,7 @@ function App() {
             addTodoTo={addTodoTo}
             updateTodoIn={updateTodoIn}
             deleteTodoFrom={deleteTodoFrom}
+            importTodosFrom={importTodosFrom}
           />
         </div>
         <div className={`page ${activeTab === 'amaj7' ? 'visible' : 'hidden'}`} >
@@ -109,6 +122,7 @@ function App() {
             addTodoTo={addTodoTo}
             updateTodoIn={updateTodoIn}
             deleteTodoFrom={deleteTodoFrom}
+            importTodosFrom={importTodosFrom}
           />
         </div>
         <div className={`page ${activeTab === 'planb' ? 'visible' : 'hidden'}`} >
@@ -120,6 +134,7 @@ function App() {
             addTodoTo={addTodoTo}
             updateTodoIn={updateTodoIn}
             deleteTodoFrom={deleteTodoFrom}
+            importTodosFrom={importTodosFrom}
           />
         </div>
       </main>

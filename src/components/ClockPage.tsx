@@ -1,7 +1,8 @@
 import Clock from './Clock';
 import TodoPage from './TodoPage';
 import type { Todo } from './TodoItem';
-import defaultTodoList from '../utils/defaultTodoList';
+import Lists from './Lists';
+import React from 'react';
 
 type Colors = {
 	outline: string;
@@ -17,22 +18,39 @@ type ClockPageProps = {
 	addTodoTo: (listName: string) => void;
 	updateTodoIn: (listName: string, next: Todo) => void;
 	deleteTodoFrom: (listName: string, id: number) => void;
+	importTodosFrom: (sourceName: string, targetName: string) => void;
 };
 
-export default function ClockPage({title, listKey, colors, listsData, addTodoTo, updateTodoIn, deleteTodoFrom}: ClockPageProps) {
-	const bucket = listsData[listKey] ?? defaultTodoList;
+export default function ClockPage({title, listKey, colors, listsData, addTodoTo, updateTodoIn, deleteTodoFrom, importTodosFrom}: ClockPageProps) {
+	const initialImport = "Import from...";
+	const [importListKey, setImportListKey] = React.useState<string>(initialImport);
 
 	return (
 		<>
 			<div className="title">{title}</div>
+			<Lists
+				lists={[initialImport, ...Object.keys(listsData).filter((k) => k !== listKey)]}
+				selected={importListKey}
+				hideNew={true}
+				onSelectList={(newList) => {
+					if (newList === initialImport) {
+						setImportListKey(newList);
+						return;
+					}
+					if (window.confirm(`Import list from "${newList}" into "${listKey}"? This will replace all existing items in "${listKey}".`)) {
+						importTodosFrom(newList, listKey);
+						setImportListKey(newList);
+					}
+				}}
+			/>
 			<Clock
-				todos={bucket.todos}
+				todos={listsData[listKey].todos}
 				outlineColor={colors.outline}
 				fillColor={colors.fill}
 				shadeColor={colors.shade}
 			/>
 			<TodoPage
-				todos={bucket.todos}
+				todos={listsData[listKey].todos}
 				onAdd={() => addTodoTo(listKey)}
 				onChange={(next) => updateTodoIn(listKey, next)}
 				onDelete={(id) => deleteTodoFrom(listKey, id)}
