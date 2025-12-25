@@ -23,7 +23,7 @@ function App() {
   const addTodo = () => {
     setListsData((prev) => {
       const bucket = prev[selectedList] ?? { todos: [], nextId: 1 };
-      const newTodo: Todo = { id: bucket.nextId, text: '', starred: false, startTime: null, endTime: null };
+      const newTodo: Todo = { id: bucket.nextId, text: '', starred: false, startTime: null, endTime: null, colorIndex: 0 };
       return {
         ...prev,
         [selectedList]: { todos: [...bucket.todos, newTodo], nextId: bucket.nextId + 1 },
@@ -70,16 +70,16 @@ function App() {
   return (
     <div className="App app-shell">
       <main className="content">
-        <div className="title">Todo</div>
-        <Lists
-          lists={listNames}
-          selected={selectedList}
-          onSelectList={(name) => setSelectedList(name)}
-          onCreateList={(name) => {
-            setListsData((prev) => ({ ...prev, [name]: { todos: [], nextId: 1 } }));
-          }}
-        />
         <div className={`page ${activeTab === 'todo' ? 'visible' : 'hidden'}`} >
+          <div className="title">Todo</div>
+          <Lists
+            lists={listNames}
+            selected={selectedList}
+            onSelectList={(name) => setSelectedList(name)}
+            onCreateList={(name) => {
+              setListsData((prev) => ({ ...prev, [name]: { todos: [], nextId: 1 } }));
+            }}
+          />
           <TodoPage
             todos={(listsData[selectedList] ?? { todos: [], nextId: 1 }).todos}
             onAdd={addTodo}

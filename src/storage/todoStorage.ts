@@ -76,6 +76,7 @@ export function validateTodoLists(obj: unknown): obj is TodoListsState {
             if (typeof todo.id !== "number") return false;
             if (typeof todo.text !== "string") return false;
             if (typeof todo.starred !== "boolean") return false;
+            if (typeof todo.colorIndex !== "number") return false;
             const startOk = todo.startTime === null || typeof todo.startTime === "string";
             const endOk = todo.endTime === null || typeof todo.endTime === "string";
             if (!startOk || !endOk) return false;
