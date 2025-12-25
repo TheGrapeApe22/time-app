@@ -13,8 +13,8 @@ type ListsProps = {
 
 export default function Lists({ lists, selected, onSelectList, onCreateList, className }: ListsProps = {}) {
 	// Uncontrolled fallbacks
-	const [internalLists, setInternalLists] = useState<string[]>(["List1"]);
-	const [internalSelected, setInternalSelected] = useState<string>("List1");
+	const [internalLists, setInternalLists] = useState<string[]>(["Todo", "Cluster", "Plan Amaj7", "Plan B"]);
+	const [internalSelected, setInternalSelected] = useState<string>("Todo");
 
 	const isListsControlled = Array.isArray(lists);
 	const isSelectedControlled = typeof selected === "string";
@@ -37,12 +37,12 @@ export default function Lists({ lists, selected, onSelectList, onCreateList, cla
 		if (value === "New") {
 			const name = nextListName;
 			// Uncontrolled update: mutate local state
-			if (!isListsControlled) {
-				setInternalLists((prev) => [...prev, name]);
-			}
-			if (!isSelectedControlled) {
-				setInternalSelected(name);
-			}
+			// if (!isListsControlled) {
+			// 	setInternalLists((prev) => [...prev, name]);
+			// }
+			// if (!isSelectedControlled) {
+			// 	setInternalSelected(name);
+			// }
 			onCreateList?.(name);
 			onSelectList?.(name);
 			return;

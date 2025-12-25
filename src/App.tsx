@@ -9,6 +9,7 @@ import TabIcon4 from './assets/plan-b-icon.png';
 import Lists from './components/Lists';
 import type { Todo } from './components/TodoItem';
 import { getDefaultTodoLists, loadTodoLists, saveTodoLists, TODO_STORAGE_VERSION } from './storage/todoStorage';
+import defaultTodoList from './constants/defaultTodoList';
 
 type TabKey = 'todo' | 'cluster' | 'amaj7' | 'planb';
 
@@ -77,11 +78,11 @@ function App() {
             selected={selectedList}
             onSelectList={(name) => setSelectedList(name)}
             onCreateList={(name) => {
-              setListsData((prev) => ({ ...prev, [name]: { todos: [], nextId: 1 } }));
+              setListsData((prev) => ({ ...prev, [name]: defaultTodoList }));
             }}
           />
           <TodoPage
-            todos={(listsData[selectedList] ?? { todos: [], nextId: 1 }).todos}
+            todos={(listsData[selectedList] ?? defaultTodoList).todos}
             onAdd={addTodo}
             onChange={updateTodo}
             onDelete={deleteTodo}
