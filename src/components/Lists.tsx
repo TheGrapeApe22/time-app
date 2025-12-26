@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import "./lists.css";
 
 type ListsProps = {
@@ -39,7 +39,6 @@ export default function Lists({ lists, selected, onSelectList=()=>{}, onCreateLi
 
 	return (
 		<div className={["lists-dropdown", className].filter(Boolean).join(" ")}>
-			<label className="lists-label" htmlFor="lists-select">Lists</label>
 			<select id="lists-select" className="lists-select" value={selected} onChange={handleChange}>
 				{optionNames.map((name) => (
 					<option key={name} value={name}>

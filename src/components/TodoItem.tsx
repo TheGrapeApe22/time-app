@@ -20,6 +20,7 @@ type TodoItemProps = {
 	todo: Todo;
 	onChange: (next: Todo) => void;
 	onDelete: (id: number) => void;
+	autoFocus?: boolean;
 	minimize?: boolean;
 };
 
@@ -28,7 +29,7 @@ function textAreaAdjust(element : HTMLTextAreaElement) {
 	element.style.height = (element.scrollHeight)+"px";
 }
 
-export default function TodoItem({ todo, onChange, onDelete, minimize }: TodoItemProps) {
+export default function TodoItem({ todo, onChange, onDelete, autoFocus, minimize }: TodoItemProps) {
 	const [colorAnchor, setColorAnchor] = useState<HTMLElement | null>(null);
 	const colorOpen = Boolean(colorAnchor);
 	return (
@@ -62,6 +63,7 @@ export default function TodoItem({ todo, onChange, onDelete, minimize }: TodoIte
 			<textarea className="todo-input"
 				value={todo.text}
 				onChange={(e) => {onChange({ ...todo, text: e.target.value }); textAreaAdjust(e.currentTarget);}}
+				autoFocus={autoFocus}
 			/>
 			{!minimize && (<>
 				<TimeField

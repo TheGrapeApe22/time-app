@@ -18,19 +18,21 @@ function App() {
   const initial = loadTodoLists() ?? getDefaultTodoLists();
   const [selectedList, setSelectedList] = useState<string>(initial.selectedList);
   const [listsData, setListsData] = useState<Record<string, { todos: Todo[]; nextId: number }>>(initial.lists);
+  const [focusTodoId, setFocusTodoId] = useState<number | null>(null);
 
   const listNames = useMemo(() => Object.keys(listsData), [listsData]);
 
   // Generic helpers to mutate a specific list by name
   const addTodoTo = (listName: string) => {
     setListsData((prev) => {
-      const bucket = prev[listName] ?? defaultTodoList;
-      const newTodo: Todo = { id: bucket.nextId, text: '', starred: false, startTime: null, endTime: null, colorIndex: 0 };
+      const oldList = prev[listName];
+      const newTodo: Todo = { id: oldList.nextId, text: '', starred: false, startTime: null, endTime: null, colorIndex: 0 };
       return {
         ...prev,
-        [listName]: { todos: [...bucket.todos, newTodo], nextId: bucket.nextId + 1 },
+        [listName]: { todos: [...oldList.todos, newTodo], nextId: oldList.nextId + 1 },
       };
     });
+    setFocusTodoId(listsData[listName].nextId);
   };
 
   const updateTodoIn = (listName: string, next: Todo) => {
@@ -98,6 +100,7 @@ function App() {
             onAdd={() => addTodoTo(selectedList)}
             onChange={(next) => updateTodoIn(selectedList, next)}
             onDelete={(id) => deleteTodoFrom(selectedList, id)}
+            focusId={focusTodoId ?? undefined}
             minimize={true}
           />
         </div>
@@ -111,6 +114,7 @@ function App() {
             updateTodoIn={updateTodoIn}
             deleteTodoFrom={deleteTodoFrom}
             importTodosFrom={importTodosFrom}
+            focusId={focusTodoId ?? undefined}
           />
         </div>
         <div className={`page ${activeTab === 'amaj7' ? 'visible' : 'hidden'}`} >
@@ -123,6 +127,7 @@ function App() {
             updateTodoIn={updateTodoIn}
             deleteTodoFrom={deleteTodoFrom}
             importTodosFrom={importTodosFrom}
+            focusId={focusTodoId ?? undefined}
           />
         </div>
         <div className={`page ${activeTab === 'planb' ? 'visible' : 'hidden'}`} >
@@ -135,6 +140,7 @@ function App() {
             updateTodoIn={updateTodoIn}
             deleteTodoFrom={deleteTodoFrom}
             importTodosFrom={importTodosFrom}
+            focusId={focusTodoId ?? undefined}
           />
         </div>
       </main>

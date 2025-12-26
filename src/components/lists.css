@@ -1,25 +1,27 @@
 .lists-dropdown {
-	display: inline-flex;
-	align-items: center;
-	gap: 8px;
-}
-
-.lists-label {
-	font-size: 0.9rem;
-	color: #444;
+	display: inline-block;
+	margin-bottom: 8px;
+	width: 130px;
 }
 
 .lists-select {
 	padding: 6px 10px;
 	border-radius: 6px;
-	border: 1px solid #ccc;
-	background: #fff;
-	color: #222;
+	border: 1px solid var(--text-color);
+	background: var(--background-color);
+	color: var(--text-color);
+	width: 100%;
+	flex: 1;
 }
 
 .lists-select:focus {
 	outline: none;
-	border-color: #888;
-	box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+	box-shadow: none;
+}
+
+/* Ensure dropdown options use a dark background */
+.lists-select option {
+	background: #1f2937;
+	color: #fff;
 }
 

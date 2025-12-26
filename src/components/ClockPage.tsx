@@ -19,9 +19,10 @@ type ClockPageProps = {
 	updateTodoIn: (listName: string, next: Todo) => void;
 	deleteTodoFrom: (listName: string, id: number) => void;
 	importTodosFrom: (sourceName: string, targetName: string) => void;
+	focusId?: number;
 };
 
-export default function ClockPage({title, listKey, colors, listsData, addTodoTo, updateTodoIn, deleteTodoFrom, importTodosFrom}: ClockPageProps) {
+export default function ClockPage({title, listKey, colors, listsData, addTodoTo, updateTodoIn, deleteTodoFrom, importTodosFrom, focusId}: ClockPageProps) {
 	const initialImport = "Import from...";
 	const [importListKey, setImportListKey] = React.useState<string>(initialImport);
 
@@ -55,6 +56,7 @@ export default function ClockPage({title, listKey, colors, listsData, addTodoTo,
 				onChange={(next) => updateTodoIn(listKey, next)}
 				onDelete={(id) => deleteTodoFrom(listKey, id)}
 				minimize={false}
+				focusId={focusId}
 			/>
 		</>
 	);
