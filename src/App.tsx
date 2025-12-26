@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import ClockPage from './components/ClockPage';
 import './App.css';
 import TodoPage from './components/TodoPage';
@@ -13,6 +13,7 @@ import getNewTodoList from './utils/newTodoList';
 import ListMenu from './components/ListMenu';
 import { appTheme } from './components/theme';
 import { ThemeProvider } from '@mui/material';
+import StartupPage from './components/StartupPage';
 
 type TabKey = 'todo' | 'cluster' | 'amaj7' | 'planb';
 
@@ -22,6 +23,7 @@ function App() {
   const [selectedList, setSelectedList] = useState<string>(initial.selectedList);
   const [listsData, setListsData] = useState<Record<string, { todos: Todo[]; nextId: number }>>(initial.lists);
   const [focusTodoId, setFocusTodoId] = useState<number | null>(null);
+  const [startupState, setStartupState] = useState<'visible' | 'entering' | 'exiting' | 'hidden'>('visible');
 
   const listNames = useMemo(() => Object.keys(listsData), [listsData]);
 
@@ -85,10 +87,31 @@ function App() {
     });
   }, [selectedList, listsData]);
 
+  // When reopening, mount off-screen then trigger slide down
+  useEffect(() => {
+    if (startupState === 'entering') {
+      requestAnimationFrame(() => setStartupState('visible'));
+    }
+  }, [startupState]);
+
   return (
     <div className="App app-shell"><ThemeProvider theme={appTheme}>
+      {startupState !== 'hidden' && (
+        <div
+          className={`startup-overlay ${startupState === 'visible' ? 'visible' : 'hidden-up'}`}
+          onTransitionEnd={() => startupState === 'exiting' && setStartupState('hidden')}
+        >
+          <StartupPage onContinue={() => startupState === 'visible' && setStartupState('exiting')} />
+        </div>
+      )}
       <main className="content">
         <div className={`page ${activeTab === 'todo' ? 'visible' : 'hidden'}`} >
+          <button
+            className="startup-link"
+            onClick={() => startupState === 'hidden' && setStartupState('entering')}
+          >
+            A Natural Scream
+          </button>
           <div className="title">Todo</div>
           <div className="lists-header">
             <Lists

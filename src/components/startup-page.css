@@ -1,0 +1,40 @@
+.startup-page {
+    /* display: flex;
+    flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    color: black;
+    text-align: center;
+}
+.scream-image {
+    width: 400px;
+    height: auto;
+}
+
+.pua-image {
+    width: 200px;
+    height: auto;
+    margin-right: 30px;
+}
+
+.bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.yes-button {
+    margin-top: 20px;
+    height: 60px;
+    padding: 10px 20px;
+    font-size: 30px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.question {
+    display: flex;
+    flex-direction: column;
+}

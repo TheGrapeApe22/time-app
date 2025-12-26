@@ -96,3 +96,34 @@ body {
 .lists {
   margin-right: 16px;
 }
+
+/* Startup overlay: blank page that slides up on click */
+.startup-overlay {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  z-index: 9999;
+  transition: transform 600ms ease-in-out;
+  will-change: transform;
+}
+
+.startup-overlay.visible {
+  transform: translateY(0);
+}
+
+.startup-overlay.hidden-up {
+  transform: translateY(-100%);
+}
+
+/* Small reopen button at the top */
+.startup-link {
+  align-self: center;
+  font-size: 13px;
+  border-radius: 6px;
+  color: var(--text-color);
+  background: none;
+  text-decoration: underline;
+  border: none;
+  cursor: pointer;
+  padding-bottom: 10px;
+}

@@ -1,7 +1,7 @@
 {
-  "name": "time-app",
+  "name": "a-natural-scream",
   "version": "0.1.0",
-  "homepage": "https://thegrapeape22.github.io/time-app",
+  "homepage": "https://thegrapeape22.github.io/a-natural-scream",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.14.0",
