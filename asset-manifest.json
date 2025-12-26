@@ -1,19 +1,21 @@
 {
   "files": {
-    "main.css": "/a-natural-scream/static/css/main.8cfb0341.css",
-    "main.js": "/a-natural-scream/static/js/main.55fbc1f9.js",
+    "main.css": "/a-natural-scream/static/css/main.01ca22ab.css",
+    "main.js": "/a-natural-scream/static/js/main.e2a71d76.js",
+    "static/media/pua.png": "/a-natural-scream/static/media/pua.5f9e75f84ff805bf7eed.png",
     "static/media/x-icon.png": "/a-natural-scream/static/media/x-icon.f07651c9113858f305ad.png",
     "static/media/star-empty.png": "/a-natural-scream/static/media/star-empty.4d8d37f3f66f019a19c2.png",
+    "static/media/scream.svg": "/a-natural-scream/static/media/scream.4db83ea16c54c1564d987c3b80516c4f.svg",
     "static/media/star-filled.png": "/a-natural-scream/static/media/star-filled.59e9f0fa6299d6de320e.png",
     "static/media/cluster-icon.png": "/a-natural-scream/static/media/cluster-icon.de4cf8474019d145b71e.png",
     "static/media/plan-b-icon.png": "/a-natural-scream/static/media/plan-b-icon.fb4b64261f328dcf6769.png",
     "static/media/amaj7-icon.png": "/a-natural-scream/static/media/amaj7-icon.6bcd956125dd3b7b4c32.png",
     "index.html": "/a-natural-scream/index.html",
-    "main.8cfb0341.css.map": "/a-natural-scream/static/css/main.8cfb0341.css.map",
-    "main.55fbc1f9.js.map": "/a-natural-scream/static/js/main.55fbc1f9.js.map"
+    "main.01ca22ab.css.map": "/a-natural-scream/static/css/main.01ca22ab.css.map",
+    "main.e2a71d76.js.map": "/a-natural-scream/static/js/main.e2a71d76.js.map"
   },
   "entrypoints": [
-    "static/css/main.8cfb0341.css",
-    "static/js/main.55fbc1f9.js"
+    "static/css/main.01ca22ab.css",
+    "static/js/main.e2a71d76.js"
   ]
 }
