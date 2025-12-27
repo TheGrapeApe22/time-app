@@ -5,7 +5,7 @@ import './startup-page.css'
 export default function StartupPage({onContinue}: {onContinue: () => void}) {
     return (
         <div className="startup-page">
-            <h1><br/><br/>✨A Natural Scream✨</h1>
+            <h1>✨A Natural Scream✨</h1>
             <p>Welcome :P</p>
             <img src={scream} alt="scream.svg" className="scream-image" />
             <div className="bottom">
