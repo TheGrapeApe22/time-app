@@ -4,7 +4,7 @@ import getNewTodoList from "../utils/newTodoList";
 // Storage key used in localStorage for all todo lists.
 export const TODO_STORAGE_KEY = "time-app.todoLists" as const;
 // Schema version for the persisted todo lists state.
-export const TODO_STORAGE_VERSION = 2 as const;
+export const TODO_STORAGE_VERSION = 3 as const;
 
 // Bucket of todos and the next id counter for a single list.
 export type ListBucket = {
@@ -17,6 +17,8 @@ export type TodoListsState = {
     version: number;
     selectedList: string;
     lists: Record<string, ListBucket>;
+    // Optional to allow loading older versions gracefully
+    isThemeDark?: boolean;
 };
 
 // default
@@ -24,6 +26,7 @@ export function getDefaultTodoLists(): TodoListsState {
     return {
         version: TODO_STORAGE_VERSION,
         selectedList: "Todo",
+        isThemeDark: true,
         lists: {
             "Todo": getNewTodoList(),
             "Cluster": getNewTodoList(),
@@ -64,6 +67,8 @@ export function validateTodoLists(obj: unknown): obj is TodoListsState {
     const anyObj = obj as Record<string, unknown>;
     if (typeof anyObj.version !== "number") return false;
     if (typeof anyObj.selectedList !== "string") return false;
+    // Theme flag is optional (to support older saved versions), but if present must be boolean
+    if ("isThemeDark" in anyObj && typeof anyObj.isThemeDark !== "boolean") return false;
     const lists = anyObj.lists as unknown;
     if (!lists || typeof lists !== "object") return false;
 
